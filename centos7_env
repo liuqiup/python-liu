@@ -1,0 +1,65 @@
+
+重装centos 7 for python所需要的环境
+
+一、给普通用户可以sudo的权限
+	[你是最棒的]$ su
+	[你是最棒的]$ vim /etc/sudoers 
+		在此文件中找到root   ALL=(ALL)  ALL
+		复制粘贴，将root修改成登陆用户名
+二、创建pyenv虚拟环境
+	sudo yum install openssl*   安装其所需要的库文件
+    git clone https://github.com/yyuu/pyenv.git ~/.pyenv 		下载pyenv
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile		
+    echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+    echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
+    exec $SHELL		重启终端运行的程序(shell)
+    source ~/.bash_profile	重新加载配置文件.bash_profile
+    pyenv  install --list	列出所有我们可以通过pyenv安装的python版本
+    pyenv install -v 3.6.4	用pyenv命令安装python3.6.4
+    pyenv versions	查看当前系统中所有的python版本
+    pyenv version	查看当前所使用的版本
+    pyenv global 3.6.4	将使用版本切换到3.6.4
+    pyenv version
+    python
+	如果成功了 重启计算机
+	
+	补充:
+		关机	
+			init 0
+			shutdown -h now
+			halt
+			poweroff
+		
+		重启		
+			init 6
+			reboot
+			shutdown -r now
+
+三、通过ftp服务访问共享目录
+	sudo yum install lftp
+	lftp 172.25.1.206
+		get [filepath]	   下载文件
+		mirror [dirpath]   下载目录
+		
+		by
+	
+四、vnc
+	lftp下载老师共享的VNC软件包
+	安装
+		sudo yum install VNCxxxx
+	启动
+		vncviewer
+		
+	
+
+五、sougo输入发的安装
+下载后依次执行
+    1.sudo yum install sogoupinyin-1.2.0.0056-1.fc22.x86_64.rpm 
+    2.yum-config-manager --add-repo=https://copr.fedoraproject.org/coprs/mosquito/myrepo/repo/epel-7/mosquito-myrepo-epel-7.repo
+    3.sudo yum-config-manager --add-repo=https://copr.fedoraproject.org/coprs/mosquito/myrepo/repo/epel-7/mosquito-myrepo-epel-7.repo
+    4.gsettings set org.gnome.settings-daemon.plugins.keyboard active false 
+    5.imsettings-switch fcitx
+    6.init 6
+	
+
+
